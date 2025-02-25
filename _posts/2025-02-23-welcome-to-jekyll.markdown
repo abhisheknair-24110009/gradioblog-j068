@@ -145,9 +145,74 @@ This demonstration highlights Gradio’s ability to create interactive and acces
 
 # 2. Blocks
 
-# 3. Advanced Blocks
+Gradio blocks is a much more flexible interface builder for the gradio library. It provides the user will all the tools to edit all components of the interface. It allows developers to create multi-component applications with full control over its layout, theme, data flow etc. Blocks lets users create complex workflows, chain multiple functions together, and design custom user interactions. 
+Following are two apps made to demonstrate gradio blocks:
 
-The code snippet for the following is:
+1\. 
+The app below shows an interface created using Gradio blocks for a random name generator app. It shows the sidebar function. In the app, users can select an option for the type of name that they want and continuously generate names without having to select what type of name they want again, i.e. function calls with certain conditions can be done without having to chose the condition everytime the function is called.
+
+<iframe src="https://abhisheknair-24110009-gradio-app-6.hf.space" width="100%" height="600px" style="border:none;"></iframe>
+
+The code snippet for the above is:
+
+```python
+import gradio as gr
+import random
+
+
+def generate_pet_name(animal_type, personality):
+    cute_prefixes = ["Fluffy", "Ziggy", "Bubbles", "Pickle", "Waffle", "Mochi", "Cookie", "Pepper"]
+    animal_suffixes = {
+        "Cat": ["Whiskers", "Paws", "Mittens", "Purrington"],
+        "Dog": ["Woofles", "Barkington", "Waggins", "Pawsome"],
+        "Bird": ["Feathers", "Wings", "Chirpy", "Tweets"],
+        "Rabbit": ["Hops", "Cottontail", "Bouncy", "Fluff"]
+    }
+
+    prefix = random.choice(cute_prefixes)
+    suffix = random.choice(animal_suffixes[animal_type])
+
+    if personality == "Silly":
+        prefix = random.choice(["Sir", "Lady", "Captain", "Professor"]) + " " + prefix
+    elif personality == "Royal":
+        suffix += " the " + random.choice(["Great", "Magnificent", "Wise", "Brave"])
+
+    return f"{prefix} {suffix}"
+
+
+with gr.Blocks(theme=gr.themes.Soft()) as demo:
+    with gr.Sidebar(position="left"):
+        gr.Markdown("# 🐾 Pet Name Generator")
+        gr.Markdown("Use the options below to generate a unique pet name!")
+
+        animal_type = gr.Dropdown(
+            choices=["Cat", "Dog", "Bird", "Rabbit"],
+            label="Choose your pet type",
+            value="Cat"
+        )
+        personality = gr.Radio(
+            choices=["Normal", "Silly", "Royal"],
+            label="Personality type",
+            value="Normal"
+        )
+
+    name_output = gr.Textbox(label="Your pet's fancy name:", lines=2)
+    generate_btn = gr.Button("Generate Name! 🎲", variant="primary")
+    generate_btn.click(
+        fn=generate_pet_name,
+        inputs=[animal_type, personality],
+        outputs=name_output
+    )
+
+demo.launch()
+```
+
+2\.
+The app below shows how history of inputs can be saved throughout a session in a Gradio app, and then be re-used in later inputs as well.
+
+<iframe src="https://abhisheknair-24110009-gradio-app-3.hf.space" width="100%" height="600px" style="border:none;"></iframe> 
+
+The code snippet for the above is:
 ```python
 import gradio as gr
 
@@ -207,9 +272,8 @@ with gr.Blocks() as demo:
 # Launch the Gradio interface
 demo.launch()
 ```
-<iframe src="https://abhisheknair-24110009-gradio-app-3.hf.space" width="100%" height="600px" style="border:none;"></iframe> 
 
-# 4. Chatbot
+# 3. Chatbot
 
 Gradio makes it easy to build and deploy chatbots by providing an intuitive interface for handling user input and generating responses in real-time. With support for text-based inputs and outputs, chatbots can process user messages and return AI-generated responses instantly. 
 Using Gradio, chatbots can be seamlessly integrated with a wide range of AI and machine learning models, enabling natural and interactive conversations. Developers can connect chatbots with different AI or Machine Learning models and create an interactive interface for them through Gradio. Gradio’s support for multiple input types allows users to interact via text, voice, or even images, making chatbots more versatile. Whether for customer support, virtual assistants, or AI-powered conversation models, Gradio provides a simple yet powerful framework for developing engaging chatbot experiences.
@@ -252,7 +316,7 @@ with gr.Blocks() as demo:
 demo.launch()
 ```
 
-# 5. Data Science and Plots
+# 4. Data Science and Plots
 
 Gradio enables interactive data science interfaces by allowing users to visualize and manipulate data in real-time, making trend analysis and model interpretation more intuitive. By integrating interactive inputs such as sliders, dropdowns, and text fields, users can dynamically adjust parameters and instantly see how changes affect graphs, predictions, or statistical outputs. Gradio supports real-time data visualization through libraries like Matplotlib, Plotly, and Seaborn, enabling users to explore datasets, observe trends, and compare results interactively. This helps users obtain results and interpret trends in data instantaneously, without having to wait/create separate programs for different cases.
 
@@ -362,26 +426,46 @@ demo.launch()
 
 The following are some more additional features of the Gradio Python Library
 
-1\. **APIs** <br>
-    APIs are mechanisms that enable two software components to communicate with each other using a set of definitions and protocols. Gradio library has a various variety of such apis. For example, gr.Interface(), gr.Blocks(), gr.State(), gr.launch(), etc.
-
-2\. **ML Frameworking** <br>
-Gradio supports multiple machine learning (ML) frameworks, allowing users to quickly deploy models with interactive UIs such as TensorFlows and PyTorch for image classification, Text Summarization using Hugging Face Transformers, Chatbot using OpenAI API, etc.
-
-3\. **Streaming** <br>
-Streaming in Gradio allows functions to continuously return partial outputs while processing, instead of waiting for the full computation to complete. This is useful for chatbots, real-time inference, and long-running tasks. It has applications in AI-generated text, Real time object detection and speech recognition using YOLOv10 and Transformers ASR Model, Object detection in videos using RT-DETR, Conversational Chatbots etc.
-
-4\. **Sharing** <br>
-Gradio demos can be easily shared publicly by setting share=True in the launch() method. If you'd like to have a permanent link to your Gradio demo on the internet, use Hugging Face Spaces. Hugging Face Spaces provides the infrastructure to permanently host your machine learning model for free!. You can put an authentication page in front of your app to limit who can open your app. With the auth= keyword argument in the launch() method, you can provide a tuple with a username and password, or a list of acceptable username/password tuples.
-
-5\. **Image, Audio, and Video Input/Output in Gradio.** <br>
+1\. **🖼🎙🎥 Image, Audio, and Video Input/Output in Gradio.** <br>
 Gradio makes it easy to handle image, audio, and video inputs/outputs, allowing you to build AI applications for computer vision, speech processing, and video analysis. 
 
 Images --> Classification (Image to Text)
-                   Transformation (Image → Modified Image & Text)
-Audio --> Speech-to-Text (Audio → Text) and vice-versa
-Video --> Video Playback (Video → Video)
+                   Transformation (Image → Modified Image & Text) <br>
+Audio --> Speech-to-Text (Audio → Text) and vice-versa <br>
+Video --> Video Playback (Video → Video) <br>
                  Extract Video Frames (Video → Image)
 
-6\. **Custom Components**
+2\. **📡⚡📺 Streaming.** <br>
+Streaming in Gradio allows functions to continuously return partial outputs while processing, instead of waiting for the full computation to complete. This is useful for chatbots, real-time inference, and long-running tasks. It has applications in AI-generated text, Real time object detection and speech recognition using YOLOv10 and Transformers ASR Model, Object detection in videos using RT-DETR, Conversational Chatbots etc.
+
+3\. **🛠 Custom Components.** <br>
 Gradio allows you to create custom components by subclassing existing Gradio components and modifying their behavior, appearance, or functionality. You can publish your components as Python packages so that other users can use them as well. Users will be able to use all of Gradio's existing functions, such as gr.Blocks, gr.Interface, API usage, themes, etc. with Custom Components. It helps in reusability and UI customization, useful for styling, setting defaults, and enhancing functionality and You can extend built-in Gradio components with additional properties.
+
+4\. **📤 Sharing.** <br>
+Gradio demos can be easily shared publicly by setting share=True in the launch() method. If you'd like to have a permanent link to your Gradio demo on the internet, use Hugging Face Spaces. Hugging Face Spaces provides the infrastructure to permanently host your machine learning model for free!. You can put an authentication page in front of your app to limit who can open your app. With the auth= keyword argument in the launch() method, you can provide a tuple with a username and password, or a list of acceptable username/password tuples.
+
+<p align="center">
+  <img src="{{ site.baseurl }}/assets/sharing.jpg" alt="Alt Text" width="90%">
+</p>
+
+5\. **🤖📊🔧 ML Frameworking.** <br>
+Gradio supports multiple machine learning (ML) frameworks, allowing users to quickly deploy models with interactive UIs such as TensorFlows and PyTorch for image classification, Text Summarization using Hugging Face Transformers, Chatbot using OpenAI API, etc.
+
+6\. **📡 APIs.** <br>
+    APIs are mechanisms that enable two software components to communicate with each other using a set of definitions and protocols. Gradio library has a various variety of such apis. For example, gr.Interface(), gr.Blocks(), gr.State(), gr.launch(), etc.
+
+## 🏁 Conclusion   
+
+The Gradio Python library provides developers with powerful tools to create GUIs for their Machine Learning models and other Python functions. These interfaces are more interactive and responsive allowing developers to obtain real-time outputs and feedback for their models. Gradio allows for users to use a multitude of input and output formats, this allows developers to fully demonstrate their models through these various input and output formats and users to experience the complete functionality of these models/functions.
+
+Gradio blocks puts all the control in the developer's hands, providing features like multi input-output methods, chaining of functions together, history saving throughout sessions, complete control of the interface for customisation and much more. This allows developers to fine-tune their models interface according to their needs to demonstrate their models/functions in the best way possible. 
+
+The demonstrations provided in this blog highlight the versatility of Gradio, showing how it can be used for chatbots, data science interfaces, and more.
+
+## 📝 References
+
+1. [Official Documentation Link](https://www.gradio.app/docs) - Official Gradio documentation
+
+2. [YouTube Video Link](https://www.youtube.com/watch?v=eE7CamOE-PA&t=395s) - A Gradio tutorial by AssemblyAI
+
+3. [YouTube Playlist Link](https://www.youtube.com/watch?v=G49c8q3aiQY&list=PLpdmBGJ6ELUJsU8e-B_QwokxOpWjzfYxZ) - A Youtube Playlist for Gradio tutorials by 1littlecoder
