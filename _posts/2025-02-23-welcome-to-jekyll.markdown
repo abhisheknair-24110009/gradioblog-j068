@@ -5,7 +5,11 @@ date:   2025-02-23 22:14:47 +0530
 categories: jekyll update
 ---
 
-![My Image](/assets/gradio-icon.png){: style="display: block; margin: auto; width: 60%;" }
+<p align="center">
+  <img src="{{ site.baseurl }}/assets/gradio-icon.png" alt="Alt Text" width="60%">
+</p>
+
+
 
 
 ##  📄 Introduction
@@ -128,6 +132,8 @@ demo.launch()
 ```
 <iframe src="https://abhisheknair-24110009-gradio-app-1.hf.space" width="100%" height="600px" style="border:none;"></iframe> 
 
+# 2. Blocks
+
 # 3. Advanced Blocks
 
 The code snippet for the following is:
@@ -233,10 +239,3 @@ with gr.Blocks() as demo:
 demo.launch()
 ```
 <iframe src="https://abhisheknair-24110009-gradio-app-2.hf.space" width="100%" height="600px" style="border:none;"></iframe> 
-
-
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
