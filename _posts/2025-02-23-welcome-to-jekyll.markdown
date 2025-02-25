@@ -429,14 +429,24 @@ The following are some more additional features of the Gradio Python Library
 1\. **🖼🎙🎥 Image, Audio, and Video Input/Output in Gradio.** <br>
 Gradio makes it easy to handle image, audio, and video inputs/outputs, allowing you to build AI applications for computer vision, speech processing, and video analysis. 
 
-Images --> Classification (Image to Text)
-                   Transformation (Image → Modified Image & Text) <br>
+Images --> Classification (Image to Text) and 
+                Transformation (Image → Modified Image & Text) <br>
 Audio --> Speech-to-Text (Audio → Text) and vice-versa <br>
-Video --> Video Playback (Video → Video) <br>
-                 Extract Video Frames (Video → Image)
+Video --> Video Playback (Video → Video) and
+                Extract Video Frames (Video → Image)
+
+We can also transform images with the help of Gradio (The above transformation was brought about with the help of NumPy arrays). Gradio handles the preprocessing and postprocessing to convert images to NumPy arrays and vice versa.
+
+<p align="center">
+  <img src="{{ site.baseurl }}/assets/images.jpg" alt="Alt Text" width="90%">
+</p>
 
 2\. **📡⚡📺 Streaming.** <br>
 Streaming in Gradio allows functions to continuously return partial outputs while processing, instead of waiting for the full computation to complete. This is useful for chatbots, real-time inference, and long-running tasks. It has applications in AI-generated text, Real time object detection and speech recognition using YOLOv10 and Transformers ASR Model, Object detection in videos using RT-DETR, Conversational Chatbots etc.
+
+<p align="center">
+  <img src="{{ site.baseurl }}/assets/streaming.jpg" alt="Alt Text" width="90%">
+</p>
 
 3\. **🛠 Custom Components.** <br>
 Gradio allows you to create custom components by subclassing existing Gradio components and modifying their behavior, appearance, or functionality. You can publish your components as Python packages so that other users can use them as well. Users will be able to use all of Gradio's existing functions, such as gr.Blocks, gr.Interface, API usage, themes, etc. with Custom Components. It helps in reusability and UI customization, useful for styling, setting defaults, and enhancing functionality and You can extend built-in Gradio components with additional properties.
@@ -454,6 +464,24 @@ Gradio supports multiple machine learning (ML) frameworks, allowing users to qui
 6\. **📡 APIs.** <br>
     APIs are mechanisms that enable two software components to communicate with each other using a set of definitions and protocols. Gradio library has a various variety of such apis. For example, gr.Interface(), gr.Blocks(), gr.State(), gr.launch(), etc.
 
+
+## 🛠 Practical Applications
+
+1\. **🖥 Interfaces**
+    Gradio's gr.Interface() makes it easy to create web-based UIs for AI models, ML applications, and interactive tools. It allows users to interact with models through simple web interfaces.
+
+2\. **🤖 AI-Chatbots**
+    Gradio makes it easy to build and deploy AI-powered chatbots for various real-world applications. They can be used in various fields for example: Customer Support Automation, AI Chatbot for Healthcare, AI Tutoring & Educational Chatbots, etc.
+
+3\. **📸 Image Processing & Computer Vision**
+    Gradio makes it easy to deploy image processing and computer vision models with interactive web-based UIs. It can be used for Face Detection & Recognition, Object Detection, AI-Powered Image Classification, etc.
+
+4\. **🎙 Speech Recognition & Audio Processing**
+    Gradio simplifies speech recognition and audio processing by providing an easy-to-use UI for deploying AI models. For example: Speech-to-Text, Language Translation for Speech, etc.
+
+5\. **🎥 Video Analysis & AI-Powered Surveillance**
+    Gradio enables easy deployment of AI models for real-time video analysis and surveillance applications. For example: Real-Time Object Detection in Surveillance, Face Recognition & Person Identification, Crowd Counting & Density Estimation, etc.
+
 ## 🏁 Conclusion   
 
 The Gradio Python library provides developers with powerful tools to create GUIs for their Machine Learning models and other Python functions. These interfaces are more interactive and responsive allowing developers to obtain real-time outputs and feedback for their models. Gradio allows for users to use a multitude of input and output formats, this allows developers to fully demonstrate their models through these various input and output formats and users to experience the complete functionality of these models/functions.
@@ -469,3 +497,5 @@ The demonstrations provided in this blog highlight the versatility of Gradio, sh
 2. [YouTube Video Link](https://www.youtube.com/watch?v=eE7CamOE-PA&t=395s) - A Gradio tutorial by AssemblyAI
 
 3. [YouTube Playlist Link](https://www.youtube.com/watch?v=G49c8q3aiQY&list=PLpdmBGJ6ELUJsU8e-B_QwokxOpWjzfYxZ) - A Youtube Playlist for Gradio tutorials by 1littlecoder
+
+4. [Link to source](https://docs.ultralytics.com/integrations/gradio/#why-use-gradio-for-object-detection) - Reference to image used in Streaming subheading of Additional Features
